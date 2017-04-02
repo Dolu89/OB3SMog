@@ -1,0 +1,7 @@
+## Title: OB3SMog
+## Version: 1.1
+## Author: Dolu89
+## Interface: 70000
+## SavedVariables: AllMogs
+
+OB3SMF.xml

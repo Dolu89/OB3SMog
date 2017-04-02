@@ -1,0 +1,112 @@
+<Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="OB3SMF.lua" />
+	<Frame name="OB3SMF1" hidden="true" parent="UIParent" toplevel="true" movable="true" enableMouse="true">
+		<Size x="348" y="129" />
+		<Anchors>
+			<Anchor point="CENTER" x="15" y="104" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="SelectedMog" inherits="GameFontNormal" text="No mog selected..." justifyH="LEFT">
+					<Size x="197" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="123" y="-58" />
+					</Anchors>
+				</FontString>
+				<FontString inherits="QuestFont_Shadow_Huge" text="OB3S Mog" justifyH="LEFT">
+					<Size x="215" y="37" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="30" y="-15" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="btnClose" inherits="UIPanelCloseButton" parent="OB3SMF1" text="">
+				<Size x="30" y="31" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="310" y="-7" />
+				</Anchors>
+				<Backdrop />
+				<HitRectInsets>
+					<AbsInset left="1" right="1" top="1" bottom="1" />
+				</HitRectInsets>
+			</Button>
+			<Button name="btnSelectMog" inherits="UIPanelButtonTemplate" parent="OB3SMF1" text="Select mog">
+				<Size x="87" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="30" y="-57" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnSelectMog_OnClick()
+					</OnClick>
+					<OnLoad>
+
+					</OnLoad>
+				</Scripts>
+			</Button>
+			<Button name="btnImport" inherits="UIPanelButtonTemplate" parent="OB3SMF1" text="Import character mogs">
+				<Size x="189" y="23" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="30" y="-88" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						btnImport_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterEvent("TRANSMOGRIFY_OPEN");
+				self:RegisterEvent("TRANSMOGRIFY_CLOSE");
+				self:RegisterEvent("PLAYER_ENTERING_WORLD");
+				self:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnEvent>
+				if event == "TRANSMOGRIFY_OPEN" then
+					self:Show();
+				elseif event == "TRANSMOGRIFY_CLOSE" then
+					self:Hide();
+				end
+			</OnEvent>
+			<OnDragStart>
+				self:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing();
+			</OnDragStop>
+		</Scripts>
+	</Frame>
+	<DressUpModel>
+		<Anchors>
+			<Anchor point="TOPLEFT" />
+		</Anchors>
+	</DressUpModel>
+	<PlayerModel inherits="ModelTemplate" hidden="true">
+		<Size x="200" y="250" />
+		<Anchors>
+			<Anchor point="TOPLEFT" x="718" y="-287" />
+		</Anchors>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize val="32" />
+			<EdgeSize val="32" />
+		</Backdrop>
+	</PlayerModel>
+</Ui>
